@@ -122,6 +122,12 @@ a.disabled{
   width: 10vw;
   height:50vh;
 }
+th{
+  color: red;
+}
+td{
+  color: white;
+}
 
 footer
 {
@@ -145,5 +151,8 @@ footer
 .social > a:hover{
     color:rgb(86, 66, 241);
     cursor:pointer;
+}
+tablec{
+  width: 100vw;
 }
 
