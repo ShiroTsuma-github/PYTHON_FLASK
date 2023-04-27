@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- add_book.html -->
+<form method="POST" action="{{ url_for('add_book') }}">
+    <!-- form fields here -->
+</form>
+ 
+
+<div class="bottom table-responsive"></div>
+<table class="table table-dark thead-dark table-bordered table-hover w-auto">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Last Chapter</th>
+            <th>Total Chapters</th>
+            <th>Frequency</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th>Priority</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.book_type }}</td>
+            <td>{{ book.last_chapter }}</td>
+            <td>{{ book.total_chapters }}</td>
+            <td>{{ book.frequency }}</td>
+            <td>{{ book.status }}</td>
+            <td>{{ book.notes }}</td>
+            <td>{{ book.priority }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

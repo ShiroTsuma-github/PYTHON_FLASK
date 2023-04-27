@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" action="{{ url_for('add_book') }}">
+    <label>Title:</label>
+    <input type="text" name="title" required>
+
+    <label>Type:</label>
+    <select name="book_type">
+        {% for book_type in book_types %}
+        <option value="{{ book_type }}">{{ book_type }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Last Chapter:</label>
+    <input type="text" name="last_chapter">
+
+    <label>Total Chapters:</label>
+    <input type="number" name="total_chapters">
+
+    <label>Frequency:</label>
+    <input type="text" name="frequency">
+
+    <label>Status:</label>
+    <select name="status">
+        {% for status in statuses %}
+        <option value="{{ status }}">{{ status }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Notes:</label>
+    <textarea name="notes"></textarea>
+
+    <label>Priority:</label>
+    <input type="number" name="priority" value="0">
+
+    <input type="submit" value="Add Book">
+</form>
+{% endblock %}
