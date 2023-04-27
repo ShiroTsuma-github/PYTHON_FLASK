@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+	font-family: 'Oswald', sans-serif;
+  font-size: 2vh;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+body{
+    color:rgb(207, 197, 197);
+    background-color:#212529;
+    min-height: 90vh;
+}
+h1{
+  display: block;
+    text-align:center;
+    margin-top: 4vh;
+	font-size: 400%;
+    margin-bottom: 6vh;
+}
+.top
+{
+	min-height:20vh;
+	width:90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.bottom
+{
+  min-height: 80vh;
+  width:90%;
+	border: 1px solid red;
+	margin-left: auto;
+	margin-right: auto;
+}
+.p20{
+	width:20%;
+}
+.t120{
+	font-size: 120%;
+}
+.cb{
+	color:black;
+}
+
+.st{
+  transform:scaleY(1.2) translateY(0.9vh);
+}
+.sb{
+  transform: scale(0.78) translate(-2vw,-1.3vh);
+}
+.tp {
+  position: relative;
+  display: inline-block;
+}
+
+.tp .tooltiptext {
+  visibility: hidden;
+  max-width: 15vh;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  left: 105%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+.tp .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tp:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+td{
+  text-align: center;
+  max-width:32vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.disabled{
+  pointer-events: none;
+  cursor: default;
+}
+#ps{
+  font-size:inherit;
+  position: absolute;
+  color:inherit;
+  transform: translateX(0.2vw);
+}
+
+.middle{
+  margin:auto;
+  width: 10vw;
+  height:50vh;
+}
+
+footer
+{
+    background-color: #000000;
+    color: white;
+    padding: 1%;
+    font-size: 15px;
+    text-align: center;
+    font-family: 'Titillium Web', sans-serif;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.social > a{
+    padding: 1%;
+    font-size: 15px;
+}
+
+.social > a:hover{
+    color:rgb(86, 66, 241);
+    cursor:pointer;
+}
+
