@@ -1,62 +1,56 @@
-{% extends 'base.html' %}
+{% extends 'add.html' %}
 
-{% block content %}
-<!-- add_book.html -->
-<form method="POST" action="{{ url_for('add_book') }}">
-    <!-- form fields here -->
-</form>
+{% block tabela %}
  
-<div class="bottom">
-    <table class="table table-dark thead-dark table-bordered table-hover w-auto tablec">
+<div class="tablec" style="margin-top: 100px;">
+    <table class="table table-dark thead-dark table-bordered table-hover w-auto">
         <thead class="thead-dark">
             <tr>
                 <th style="background-color:#323539; text-align: center;">#</th>
                 <th style="background-color:#323539; text-align: center;">Title</th>
                 <th style="background-color:#323539; text-align: center;"></th>
                 <th style="background-color:#323539; text-align: center;">Type</th>
-                <th style="background-color:#323539; text-align: center;">Last Chapter</th>
                 <th style="background-color:#323539; text-align: center;">Total Chapters</th>
-                <th style="background-color:#323539; text-align: center;">Frequency</th>
+                <th style="background-color:#323539; text-align: center;">Last Chapter</th>
+                <th style="background-color:#323539; text-align: center;">Priority</th>
                 <th style="background-color:#323539; text-align: center;">Status</th>
                 <th style="background-color:#323539; text-align: center;">Notes</th>
-                <th style="background-color:#323539; text-align: center;">Priority</th>
             </tr>
         </thead>
     <tbody>
     {% for book in books %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td class="wn" id='wp{{loop.index}}'>{{book.title}}</td>
+            <td class="wn" id='wp{{loop.index}}'><p>{{book.title}}</p></td>
             <td class="wnk" style="margin:0px; padding:0px;">
                 <div class="btn-group" role="group">
                     <div class="tp">
-                    <button class="btn btn-outline-primary" onclick="cpt('wp{{loop.index}}','wpm{{loop.index}}')"
-                            onmouseout="outFunc('wpm{{loop.index}}')" >
-                        <span class="tooltiptext" id="wpm{{loop.index}}">Kopiuj do schowka</span>
-                            <p>Kopiuj</p>
+                    <button class="btn btn-outline-primary" onclick="cpt('wp{{loop.index}}','wpm{{loop.index}}')">
+                        <span class="tooltiptext" id="wpm{{loop.index}}"><p style="transform: translateY(7px);">Kopiuj</p></span>
+                            
                     </button>
                     </div>
                     <div class="tp">
-                        {% if book.link != None %}
-                        <a href="https:\\{{book.link}}" target="_blank">
-                            <button class="btn btn-outline-primary"><p>Link</p></button>
+                        
+                        {% if book.link != "" %}
+                        <a href="{{book.link}}" target="_blank">
+                            <button class="btn btn-outline-primary"><p  style="transform: translateY(7px);">Link</p></button>
                         </a>
                         {% else %}
                             <a target="_blank" class="disabled">
-                                <button class="btn btn-outline-primary" disabled><p>Link</p></button>
+                                <button class="btn btn-outline-primary" disabled><p  style="transform: translateY(7px);">Link</p></button>
                             </a>
                         {% endif %}
                         
                         
                 </div>
             </td>
-            <td class="wr">{{ book.book_type.name }}</td>
-            <td>{{ book.last_chapter }}</td>
-            <td>{{ book.total_chapters }}</td>
-            <td>{{ book.frequency }}</td>
-            <td>{{ book.status.name }}</td>
-            <td>{{ book.notes }}</td>
-            <td>{{ book.priority }}</td>
+            <td class="wr"><p>{{ book.book_type.name }}</p></td>
+            <td><p class="numbers">{{ book.total_chapters }}</p></td>
+            <td><p class="numbers">{{ book.last_chapter }}</p></td>
+            <td><p class="numbers">{{ book.priority }}</p></td>
+            <td><p class="numbers">{{ book.status.name }}</p></td>
+            <td><p class="numbers">{{ book.notes }}</p></td>
         </tr>
     {% endfor %}
     </tbody>

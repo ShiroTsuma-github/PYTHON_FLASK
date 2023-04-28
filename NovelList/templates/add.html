@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
-<form class="c-addform">
+{% block tresc %}
+<form method="POST" autocomplete="off" action="{{ url_for('add_book') }}" class="c-addform">
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <div class="row mb-4">
       <div class="col">
@@ -55,19 +55,21 @@
         </div>
     </div>
     <div class="form-outline form-floating text-black mb-4 min-width-text">
-        <input type="url" name="link" id="link" maxlength="400" class="form-control t120" placeholder="Link" pattern="((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w\-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)">
+        <input type="url" name="link" id="link" maxlength="399" class="form-control" placeholder="Link" onblur="checkURL(this)">
         <label style="padding-left:20px; font-size: 120%;" for=link>Link</label>
     </div>
   
   
     <!-- Message input -->
-    <div class="form-outline form-floating text-black mb-4 min-width-text">
-      <!-- <textarea class="form-control" id="form6Example7" rows="4"></textarea> -->
-      <textarea name="notes" rows="4" maxlength="150" class="form-control t120" id="notes" placeholder="Notatka"></textarea>
+    <div class="form-outline form-floating text-black mb-4">
+      <textarea name="notes" maxlength="399" class="form-control c-textarea" id="notes" placeholder="Notatka"></textarea>
       <label style="padding-left:20px; font-size: 120%;" for='notes'>Notatka</label>
     </div>
   
     <!-- Submit button -->
     <button type="submit" value="Add Book" style="font-size: 140%;" class="btn button-center btn-primary col-md-4">Dodaj</button>
   </form>
+  {% block tabela%}
+  {% endblock %}
+
   {% endblock %}

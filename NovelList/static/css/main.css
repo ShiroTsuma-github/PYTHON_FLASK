@@ -47,9 +47,23 @@ footer
     cursor:pointer;
 }
 tablec{
-  width: 100vw;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
-/* .center{
-  background-color: red;
-} */
+td > p{
+  display:inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25ch;
+}
+td > p.numbers
+{
+  text-align: center !important;
+}
+td{
+  text-align: center !important;
+}
+
 

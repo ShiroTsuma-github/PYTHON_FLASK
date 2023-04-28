@@ -63,6 +63,11 @@ form.c-addform{
 .button-center{
     transform: translateX(25vw) !important;
 }
+.c-textarea{
+    resize: none;
+    height: 200px !important;
+    font-size: 140%;
+}
 /* write a rule that states, when screen size below x then increase top margin */
 @media screen and (max-width: 800px) {
     .button-center{
@@ -89,7 +94,15 @@ form.c-addform{
     form.c-addform{
         width: 100%;
     }
-    .typeselect{
-        width:100%;
+}
+@media screen and (min-width: 800px) and (max-width: 1400px){
+    .min-width-text{
+        min-width: 180px !important;
+    }
+    .min-width-text:nth-of-type(2){
+        margin-top: 15px;
+    }
+    .min-width-text:nth-of-type(1){
+        margin-top: 15px;
     }
 }

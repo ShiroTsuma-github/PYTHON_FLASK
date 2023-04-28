@@ -16,7 +16,7 @@ function cpt(el,el2)
         textArea.style.outline = 'none';
         textArea.style.boxShadow = 'none';
         textArea.style.background = 'transparent';
-        textArea.value = document.getElementById(el).innerHTML.length == 0 ? "No link" : document.getElementById(el).innerHTML;
+        textArea.value = document.getElementById(el).innerHTML.length == 0 ? "No link" : document.getElementById(el).innerHTML.replace('<p>','').replace('</p>','');
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
@@ -26,23 +26,23 @@ function cpt(el,el2)
             var successful = document.execCommand('copy');
             // alert('Skopiowano');
             var tooltip = document.getElementById(el2);
-            tooltip.innerHTML = "Skopiowano: " + textArea.value;
-            alert(tooltip.innerHTML);
+            // tooltip.innerHTML = "Skopiowano: " + textArea.value;
+            alert(textArea.value);
         } 
         catch (err) 
         {
             var tooltip = el2;
-            tooltip.innerHTML = "Unable: " + textArea.value;
+            // tooltip.innerHTML = "Unable: " + textArea.value;
         };
         document.body.removeChild(textArea);
     }
     else
     {
-        var copyText = document.getElementById(el).innerHTML;
+        var copyText = document.getElementById(el).innerHTML.replace('<p>','').replace('</p>','');
         navigator.clipboard.writeText(copyText).then(() => 
         {
         var tooltip = el2;
-        tooltip.innerHTML = "Skopiowano: " + copyText;
+        // tooltip.innerHTML = "Skopiowano: " + copyText;
         });
     }
 }
@@ -59,8 +59,17 @@ function vh(v) {
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     return (v * w) / 100;
   }
-function outFunc(el) {
-    // alert(el);
-    var tooltip = document.getElementById(el);
-    tooltip.innerHTML = "Kopiuj do schowka";
-  }
+// function outFunc(el) {
+//     // alert(el);
+//     var tooltip = document.getElementById(el);
+//     tooltip.innerHTML = "Kopiuj";
+//   }
+
+function checkURL (abc) {
+    var string = abc.value;
+    if (!~string.indexOf("http")) {
+        string = "https://" + string;
+    }
+    abc.value = string;
+    return abc
+}

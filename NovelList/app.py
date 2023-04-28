@@ -16,17 +16,8 @@ indexVariables = {
     'heading': 'Novelki'
 }
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    books = Book.query.all()
-
-    app.logger.info(BookType.query.all())
-    return render_template('Lista.html', books=books,**indexVariables)
-    # return('testing')
-
-
-@app.route('/add_book', methods=['GET', 'POST'])
-def add_book():
     if request.method == 'POST':
         title = request.form.get('title')
         book_type = request.form.get('book_type')
@@ -49,12 +40,20 @@ def add_book():
     
     book_types = [book_type.name for book_type in BookType.query.all()]
     statuses = [status.name for status in Status.query.all()]
+    # return render_template('add.html', )
+    books = Book.query.all()
 
-    return render_template('add_book.html', book_types=book_types, statuses=statuses)
+    
+    return render_template('Lista.html',
+                           books=books,
+                           book_types=book_types,
+                           statuses=statuses,
+                           **indexVariables)
+    # return('testing')
 
 
 @app.route('/add', methods=['GET', 'POST'])
-def add_book2():
+def add_book():
     if request.method == 'POST':
         title = request.form.get('title')
         book_type = request.form.get('book_type')
