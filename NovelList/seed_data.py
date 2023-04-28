@@ -11,6 +11,8 @@ db.init_app(app)
 book_types = ['Novel', 'Manga', 'H-manhwa']
 statuses = ['Completed', 'Unknown', 'On hold', 'Abandoned', 'Unsure if discontinued', 'Avoid', 'Reading', 'Plan to read']
 
+
+
 with app.app_context():
     for name in book_types:
         book_type = BookType(name=name)

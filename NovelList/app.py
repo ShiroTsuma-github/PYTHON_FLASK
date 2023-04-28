@@ -73,7 +73,7 @@ def add_book():
         db.session.commit()
         return redirect(url_for('index'))
 
-    
+     
     book_types = [book_type.name for book_type in BookType.query.all()]
     statuses = [status.name for status in Status.query.all()]
 
@@ -88,6 +88,4 @@ if __name__ == '__main__':
 #TODO: Add search functionality
 #TODO: Add sorting functionality
 #TODO: Add filtering functionality
-#TODO: Add links to books
-#TODO: Add link field to book
 #TODO: Import from json

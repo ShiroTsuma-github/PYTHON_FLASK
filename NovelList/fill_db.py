@@ -15,17 +15,22 @@ with app.app_context():
 
 def ReadFromJson():
     with (open(Path('lista.json'), 'r', encoding='utf-8')) as f:
-        for line in json.load(f):
-            print(line)
-            book = Book(title=line['title'],
-                        book_type=book_type,
-                        last_chapter=last_chapter,
-                        total_chapters=total_chapters,
-                        frequency=frequency, status=status,
-                        notes=notes,
-                        priority=priority)
-            # db.session.add(book)
-    # db.session.commit()
+        with app.app_context():
+            for line in json.load(f):
+                print(line)
+                book_type = BookType.query.filter_by(name=line['bookType']).first()
+                status = Status.query.filter_by(name=line['status'] if line['status'] != '' else 'Reading').first()
+                book = Book(title=line['title'],
+                            book_type = book_type,
+                            last_chapter=line['lastChapter'],
+                            total_chapters=line['totalChapters'],
+                            status=status,
+                            notes=line['notes'],
+                            priority=line['priority'],
+                            link=''
+                            )
+                db.session.add(book)
+            db.session.commit()
 
 
 
