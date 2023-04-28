@@ -1,50 +1,38 @@
-import psycopg2
 from pathlib import Path
 from dotenv import dotenv_values
 import json
+from models import Book, BookType, Status
+from database import db
+from flask import Flask
+
+config = dotenv_values(".env")
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = config['DATABASE_URL']
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 def ReadFromJson():
     with (open(Path('lista.json'), 'r', encoding='utf-8')) as f:
-        cur = conn.cursor()
         for line in json.load(f):
             print(line)
-            cur.execute('INSERT INTO "Lista" (nazwa, typ, rozdzialy, rozdzialySPE, ocena, status, notatka, link)'
-                        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-                        (line['title'],
-                        line['bookType'],
-                        489,
-                        'A great classic!')
-           )
+            book = Book(title=line['title'],
+                        book_type=book_type,
+                        last_chapter=last_chapter,
+                        total_chapters=total_chapters,
+                        frequency=frequency, status=status,
+                        notes=notes,
+                        priority=priority)
+            # db.session.add(book)
+    # db.session.commit()
 
-cur.execute('CREATE TABLE "Lista" (id serial PRIMARY KEY,'
-                                        'nazwa varchar (250) NOT NULL,'
-                                        'typ varchar (50) NOT NULL,'
-                                        'rozdzialy integer NOT NULL,'
-                                        'rozdzialySPE varchar (100),'
-                                        'ocena integer,'
-                                        'status varchar (100),'
-                                        'notatka text,'
-                                        'link varchar (250));')
-config = dotenv_values(".env")
 
-conn = psycopg2.connect(
-        host="localhost",
-        database="novelkiFlask",
-        user=config['USER'],
-        password=config['PASSWORD'])
 
-# # Open a cursor to perform database operations
-cur = conn.cursor()
+
+
+# book = Book(title=title, book_type=book_type, last_chapter=last_chapter,
+#             total_chapters=total_chapters, frequency=frequency, status=status, notes=notes,
+#             priority=priority)
 ReadFromJson()
-# # cur.execute('INSERT INTO books (title, author, pages_num, review)'
-# #             'VALUES (%s, %s, %s, %s)',
-# #             ('A Tale of Two Cities',
-# #              'Charles Dickens',
-# #              489,
-# #              'A great classic!')
-# #             )
 
-# conn.commit()
-
-cur.close()
-conn.close()

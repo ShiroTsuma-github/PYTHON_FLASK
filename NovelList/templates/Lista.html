@@ -12,6 +12,7 @@
             <tr>
                 <th style="background-color:#323539; text-align: center;">#</th>
                 <th style="background-color:#323539; text-align: center;">Title</th>
+                <th style="background-color:#323539; text-align: center;"></th>
                 <th style="background-color:#323539; text-align: center;">Type</th>
                 <th style="background-color:#323539; text-align: center;">Last Chapter</th>
                 <th style="background-color:#323539; text-align: center;">Total Chapters</th>
@@ -24,19 +25,20 @@
     <tbody>
     {% for book in books %}
         <tr>
-            <td class="wn" id='wp{{forloop.counter}}'>{{pozycja.nazwa}}</td>
+            <td>{{ loop.index }}</td>
+            <td class="wn" id='wp{{loop.index}}'>{{book.title}}</td>
             <td class="wnk" style="margin:0px; padding:0px;">
                 <div class="btn-group" role="group">
                     <div class="tp">
-                    <button class="btn btn-outline-primary" onclick="cpt('wp{{forloop.counter}}','wpm{{forloop.counter}}')"
-                            onmouseout="outFunc('wpm{{forloop.counter}}')" >
-                        <span class="tooltiptext" id="wpm{{forloop.counter}}">Kopiuj do schowka</span>
+                    <button class="btn btn-outline-primary" onclick="cpt('wp{{loop.index}}','wpm{{loop.index}}')"
+                            onmouseout="outFunc('wpm{{loop.index}}')" >
+                        <span class="tooltiptext" id="wpm{{loop.index}}">Kopiuj do schowka</span>
                             <p>Kopiuj</p>
                     </button>
                     </div>
                     <div class="tp">
-                        {% if book.link != ""%}
-                        <a href="https:\\{{pozycja.link}}" target="_blank">
+                        {% if book.link != None %}
+                        <a href="https:\\{{book.link}}" target="_blank">
                             <button class="btn btn-outline-primary"><p>Link</p></button>
                         </a>
                         {% else %}
@@ -48,8 +50,6 @@
                         
                 </div>
             </td>
-            <td>{{ loop.index }}</td>
-            <td class="wt">{{ book.title }}</td>
             <td class="wr">{{ book.book_type.name }}</td>
             <td>{{ book.last_chapter }}</td>
             <td>{{ book.total_chapters }}</td>

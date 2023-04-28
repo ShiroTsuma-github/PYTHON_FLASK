@@ -11,11 +11,12 @@ class Book(db.Model):
     book_type = relationship('BookType', backref='books')
     last_chapter = Column(String(255), nullable=False)
     total_chapters = Column(Integer, nullable=False)
-    frequency = Column(String(255))
     status_id = Column(Integer, ForeignKey('statustable.id'), nullable=False)
     status = relationship('Status', backref='books')
     notes = Column(String(255))
     priority = Column(Integer, nullable=False)
+    grade = Column(Integer)
+    link = Column(String(255))
     date_added = Column(DateTime, default=datetime.utcnow().date())
 
 class BookType(db.Model):

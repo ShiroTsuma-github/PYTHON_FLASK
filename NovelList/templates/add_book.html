@@ -1,38 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="{{ url_for('add_book') }}">
-    <label>Title:</label>
-    <input type="text" name="title" required>
+<div class = 'top'>
+<form method="POST" autocomplete="off" action="{{ url_for('add_book') }}">
+    <div class="row">
+        <div class="form-floating mb-3 t120 cb col-md-4">
+            <input type="text" maxlength="200" id='title' class="form-control t120" placeholder="Tytuł" name="title" required>
+            <label style="padding-left:20px;" for=title>Tytuł</label>
+        </div>
+        <div class="form-group mb-3 cb snn st col-md-2">
+            <select name="book_type" class="form-select t120 sn" id="book_type">
+                {% for book_type in book_types %}
+                <option value="{{ book_type }}">{{ book_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mb-3 cb st sns col-md-2">
+            <select name="status" id="status" class="form-select t120">
+                {% for status in statuses %}
+                <option value="{{ status }}">{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-floating mb-3 t120 cb col-md-1 ">
+            <input type="number" required name="total_chapters" id="total_chapters" min="1" max="99999" class="form-control t120" placeholder="Rozdziały">
+            <label style="padding-left:20px;" for=total_chapters>Rozdziały</label>
+        </div>
+        <div class="form-floating mb-3 t120 cb col-md-1">
+            <input type="text" name="last_chapter" class="form-control t120" placeholder="v12c8" id="last_chapter">
+            <label style="padding-left:20px;" for="last_chapter">v12c8</label>
+        </div>
+        <div class="form-floating mb-3 t120 cb col-md-1">
+            <input type="number" name="grade" class="form-control t120" id="grade" value="0" min="" max="11" placeholder="0-11">
+            <label style="padding-left:20px;" for=grade> Ocena 0-11</label>
+        </div>
+        <div class="form-floating mb-3 t120 cb col-md-1">
+            <input type="number" name="priority" class="form-control t120" id="priority" value="0" min="-100" max="100" placeholder="-100-100">
+            <label style="padding-left:20px;" for=priority> Priorytet</label>
+        </div>
+        <div class="form-floating mb-3 t120 cb col-md-5">
+            <textarea name="notes" maxlength="150" class="form-control t120" id="notes" placeholder="Notatka"></textarea>
+            <label style="padding-left:20px;" for='notes'>Notatka</label>
+        </div>
+        <div class="form-floating mb-3 t120 cb col-md-5">
+            <!--  -->
+            <input type="url" name="link" id="link" maxlength="400" class="form-control t120" placeholder="Link" pattern="((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w\-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)">
+            <label style="padding-left:20px;" for=link>Link</label>
+        </div>
+        <button type="submit" value="Add Book" class="btn btn-primary sb t120 col-md-2">Dodaj</button>
+    </div>
 
-    <label>Type:</label>
-    <select name="book_type">
-        {% for book_type in book_types %}
-        <option value="{{ book_type }}">{{ book_type }}</option>
-        {% endfor %}
-    </select>
-
-    <label>Last Chapter:</label>
-    <input type="text" name="last_chapter">
-
-    <label>Total Chapters:</label>
-    <input type="number" name="total_chapters">
-
-    <label>Frequency:</label>
-    <input type="text" name="frequency">
-
-    <label>Status:</label>
-    <select name="status">
-        {% for status in statuses %}
-        <option value="{{ status }}">{{ status }}</option>
-        {% endfor %}
-    </select>
-
-    <label>Notes:</label>
-    <textarea name="notes"></textarea>
-
-    <label>Priority:</label>
-    <input type="number" name="priority" value="0">
-
-    <input type="submit" value="Add Book">
 </form>
+</div>
 {% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="c-addform">
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline form-floating text-black min-width-title">
+            <input type="text" maxlength="200" id='title' class="form-control"  placeholder="Tytuł" name="title" required>
+            <label style="padding-left:20px; font-size: 120%;" for=title>Tytuł</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+            <select name="book_type" class="form-select select-type" id="book_type">
+                {% for book_type in book_types %}
+                <option value="{{ book_type }}">{{ book_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+            <select name="status" id="status" class="form-select select-type">
+                {% for status in statuses %}
+                <option value="{{ status }}">{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline form-floating text-black min-width-text">
+            <input type="number" required name="total_chapters" id="total_chapters" min="1" max="99999" class="form-control t120" placeholder="Rozdziały">
+            <label style="padding-left:20px; font-size: 120%;" for=total_chapters>Rozdziały</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline form-floating text-black min-width-text">
+            <input type="text" name="last_chapter" class="form-control t120" placeholder="v12c8" id="last_chapter">
+            <label style="padding-left:20px; font-size: 120%;" for="last_chapter">v12c8</label>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-outline form-floating text-black min-width-text">
+                <input type="number" name="grade" class="form-control" id="grade" value="0" min="" max="11" placeholder="0-11">
+                <label style="padding-left:20px; font-size: 120%;" for=grade> Ocena 0-11</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline form-floating text-black min-width-text">
+                <input type="number" name="priority" class="form-control t120" id="priority" value="0" min="-100" max="100" placeholder="-100-100">
+                <label style="padding-left:20px; font-size: 120%;" for=priority> Priorytet</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-outline form-floating text-black mb-4 min-width-text">
+        <input type="url" name="link" id="link" maxlength="400" class="form-control t120" placeholder="Link" pattern="((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w\-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)">
+        <label style="padding-left:20px; font-size: 120%;" for=link>Link</label>
+    </div>
+  
+  
+    <!-- Message input -->
+    <div class="form-outline form-floating text-black mb-4 min-width-text">
+      <!-- <textarea class="form-control" id="form6Example7" rows="4"></textarea> -->
+      <textarea name="notes" rows="4" maxlength="150" class="form-control t120" id="notes" placeholder="Notatka"></textarea>
+      <label style="padding-left:20px; font-size: 120%;" for='notes'>Notatka</label>
+    </div>
+  
+    <!-- Submit button -->
+    <button type="submit" value="Add Book" style="font-size: 140%;" class="btn button-center btn-primary col-md-4">Dodaj</button>
+  </form>
+  {% endblock %}

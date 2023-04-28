@@ -32,14 +32,15 @@ def add_book():
         book_type = request.form.get('book_type')
         last_chapter = request.form.get('last_chapter')
         total_chapters = request.form.get('total_chapters')
-        frequency = request.form.get('frequency')
+        link = request.form.get('link')
+        grade = request.form.get('grade')
         status = request.form.get('status')
         notes = request.form.get('notes')
         priority = request.form.get('priority')
         book_type = BookType.query.filter_by(name=book_type).first()
         status = Status.query.filter_by(name=status).first()
         book = Book(title=title, book_type=book_type, last_chapter=last_chapter,
-                   total_chapters=total_chapters, frequency=frequency, status=status, notes=notes,
+                   total_chapters=total_chapters, grade=grade, link=link, status=status, notes=notes,
                    priority=priority)
         db.session.add(book)
         db.session.commit()
@@ -52,10 +53,33 @@ def add_book():
     return render_template('add_book.html', book_types=book_types, statuses=statuses)
 
 
-@app.route('/book_list')
-def book_list():
-    books = Book.query.all()
-    return render_template('Lista.html', books=books)
+@app.route('/add', methods=['GET', 'POST'])
+def add_book2():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        book_type = request.form.get('book_type')
+        last_chapter = request.form.get('last_chapter')
+        total_chapters = request.form.get('total_chapters')
+        link = request.form.get('link')
+        grade = request.form.get('grade')
+        status = request.form.get('status')
+        notes = request.form.get('notes')
+        priority = request.form.get('priority')
+        book_type = BookType.query.filter_by(name=book_type).first()
+        status = Status.query.filter_by(name=status).first()
+        book = Book(title=title, book_type=book_type, last_chapter=last_chapter,
+                   total_chapters=total_chapters, grade=grade, link=link, status=status, notes=notes,
+                   priority=priority)
+        db.session.add(book)
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    
+    book_types = [book_type.name for book_type in BookType.query.all()]
+    statuses = [status.name for status in Status.query.all()]
+
+    return render_template('add.html', book_types=book_types, statuses=statuses)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

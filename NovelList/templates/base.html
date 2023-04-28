@@ -10,14 +10,16 @@
     <script src="https://kit.fontawesome.com/355090024d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
+    <script src="{{url_for('static', filename='js/skrypty.js')}}"></script>
     <title>{{title}}</title>
 </head>
 <body>
     <h1>Strona Tomka do zapisywania przeczytanych rzeczy</h1>
-    {% block content %}{% endblock %}
-
-
-
+    <div class="min-vh-100 center">
+    {% block content %}
+    {% endblock %}
+    </div>
     <footer>
         <p class="card-text">Stron stworzona na potrzeby przetrzymywania przeczytanych rzeczy oraz ułatwienia wyszukiwania.</p>
         <div class="social mt-2 mb-3">
