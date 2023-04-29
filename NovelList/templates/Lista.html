@@ -2,6 +2,32 @@
 
 {% block tabela %}
  
+<input type="text" name="search" id="search", style="width: 500px;" autocomplete="off" list="search-books">
+<datalist id="search-books">
+    {% for book in books %}
+        <option value="{{ book.title }}" data-id="{{ book.id }}">
+    {% endfor %}
+</datalist>
+
+<script>
+    document.getElementById("search").addEventListener("change", function() {
+        var datalist = document.getElementById("search-books");
+        var selectedOption = this.value;
+        var selectedOptionId = datalist.querySelector('[value="' + selectedOption + '"]').getAttribute('data-id');
+        $.get('/get_book_details?id=' + selectedOptionId, function(bookDetails) {
+            document.getElementById('actionused').value = 'edit';
+            document.getElementById('title').value = bookDetails.title;
+            document.getElementById('book_type').value = bookDetails.book_type;
+            document.getElementById('status').value = bookDetails.status;
+            document.getElementById('total_chapters').value = bookDetails.total_chapters;
+            document.getElementById('last_chapter').value = bookDetails.last_chapter;
+            document.getElementById('grade').value = bookDetails.grade;
+            document.getElementById('priority').value = bookDetails.priority;
+            document.getElementById('link').value = bookDetails.link;
+            document.getElementById('notes').value = bookDetails.notes;
+        });
+    });
+</script>
 <div class="tablec" style="margin-top: 100px;">
     <table class="table table-dark thead-dark table-bordered table-hover w-auto">
         <thead class="thead-dark">

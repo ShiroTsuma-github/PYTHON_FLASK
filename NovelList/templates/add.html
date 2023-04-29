@@ -2,6 +2,7 @@
 {% block tresc %}
 <form method="POST" autocomplete="off" action="{{ url_for('add_book') }}" class="c-addform">
     <!-- 2 column grid layout with text inputs for the first and last names -->
+    <input type="hidden" name="actionused" id="actionused" value="add">
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline form-floating text-black min-width-title">
