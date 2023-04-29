@@ -52,9 +52,10 @@ form.c-addform{
 }
 .min-width-title{
     min-width: 256px !important;
+    width: 25vw;
 }
 .select-type{
-    width: 20vw;
+    width: 12vw;
     min-width: 128px !important;
 }
 .min-width-text{
@@ -67,6 +68,7 @@ form.c-addform{
     resize: none;
     height: 200px !important;
     font-size: 140%;
+    /* width: 50% !important; */
 }
 /* write a rule that states, when screen size below x then increase top margin */
 @media screen and (max-width: 800px) {
@@ -94,6 +96,12 @@ form.c-addform{
     form.c-addform{
         width: 100%;
     }
+    .dis-img{
+        display: none;
+    }
+    .c-textarea{
+        width: 210% !important;
+    }
 }
 @media screen and (min-width: 800px) and (max-width: 1400px){
     .min-width-text{
@@ -104,5 +112,11 @@ form.c-addform{
     }
     .min-width-text:nth-of-type(1){
         margin-top: 15px;
+    }
+    .dis-img{
+        display: none;
+    }
+    .c-textarea{
+        width: 206% !important;
     }
 }

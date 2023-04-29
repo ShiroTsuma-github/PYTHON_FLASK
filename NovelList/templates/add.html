@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block tresc %}
+
 <form method="POST" autocomplete="off" action="{{ url_for('add_book') }}" class="c-addform">
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <input type="hidden" name="actionused" id="actionused" value="add">
+    <input type="hidden" name="bookid" id="bookid" value="">
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline form-floating text-black min-width-title">
@@ -36,8 +38,8 @@
       </div>
       <div class="col">
         <div class="form-outline form-floating text-black min-width-text">
-            <input type="text" name="last_chapter" class="form-control t120" placeholder="v12c8" id="last_chapter">
-            <label style="padding-left:20px; font-size: 120%;" for="last_chapter">v12c8</label>
+            <input type="text" name="last_chapter" class="form-control t120" placeholder="Example: v12c8" id="last_chapter">
+            <label style="padding-left:20px; font-size: 120%;" for="last_chapter">Example: v12c8</label>
         </div>
       </div>
     </div>
@@ -51,7 +53,7 @@
         <div class="col">
             <div class="form-outline form-floating text-black min-width-text">
                 <input type="number" name="priority" class="form-control t120" id="priority" value="0" min="-100" max="100" placeholder="-100-100">
-                <label style="padding-left:20px; font-size: 120%;" for=priority> Priorytet</label>
+                <label style="padding-left:20px; font-size: 120%;" for=priority> Priorytet -100 - 100</label>
             </div>
         </div>
     </div>
@@ -60,16 +62,78 @@
         <label style="padding-left:20px; font-size: 120%;" for=link>Link</label>
     </div>
   
-  
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline form-floating text-black mb-4">
+          <textarea name="notes" maxlength="399" class="form-control c-textarea" id="notes" placeholder="Notatka"></textarea>
+          <label style="padding-left:20px; font-size: 120%;" for='notes'>Notatka</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline dis-img">
+            <img src="{{url_for('static', filename='images/bert.jpg')}}" width="150" alt="">
+            <img src="{{url_for('static', filename='images/bert2.jpg')}}" width="300" height="268.8" alt="">
+            <img src="{{url_for('static', filename='images/bert3.jpg')}}" width="150" alt="">
+            <!-- <img src="{{url_for('static', filename='images/bert.jpg')}}" width="150" alt=""> -->
+        </div>
+      </div>
+    </div>
     <!-- Message input -->
-    <div class="form-outline form-floating text-black mb-4">
+    <!-- <div class="form-outline form-floating text-black mb-4">
       <textarea name="notes" maxlength="399" class="form-control c-textarea" id="notes" placeholder="Notatka"></textarea>
       <label style="padding-left:20px; font-size: 120%;" for='notes'>Notatka</label>
-    </div>
+    </div> -->
   
     <!-- Submit button -->
-    <button type="submit" value="Add Book" style="font-size: 140%;" class="btn button-center btn-primary col-md-4">Dodaj</button>
+    <button type="submit" id="addbutton" value="Add Book" style="font-size: 140%;" class="btn button-center btn-primary col-md-4">Dodaj</button>
+    <button type="submit" name="delete" id="delete" disabled style="font-size: 140%;" class="btn button-center btn-danger col-md-4" id="delete" value="delete">Usuń</button>
   </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById("actionused").addEventListener("change", function() {
+        alert("test")
+        var editButton = document.getElementById("delete");
+        if (this.value === "edit") {
+          editButton.removeAttribute("disabled");
+        } else {
+          editButton.setAttribute("disabled", "disabled");
+        }
+      });
+    });
+  </script>
+
+<input type="text" name="search" id="search", style="width: 500px;" autocomplete="off" list="search-books">
+<datalist id="search-books">
+    {% for book in books %}
+        <option value="{{ book.title }}" data-id="{{ book.id }}">
+    {% endfor %}
+</datalist>
+
+<script>
+  document.getElementById("search").addEventListener("change", function() {
+      var datalist = document.getElementById("search-books");
+      var selectedOption = this.value;
+      var selectedOptionId = datalist.querySelector('[value="' + selectedOption + '"]').getAttribute('data-id');
+      $.get('/get_book_details?id=' + selectedOptionId, function(bookDetails) {
+          document.getElementById('actionused').value = 'edit';
+          document.getElementById('addbutton').innerText = 'Edytuj';
+          var editButton = document.getElementById("delete");
+          document.getElementById("search").setAttribute("disabled", "disabled")
+          editButton.removeAttribute("disabled");
+          document.getElementById('bookid').value = Number(selectedOptionId);
+          document.getElementById('title').value = bookDetails.title;
+          document.getElementById('book_type').value = bookDetails.book_type;
+          document.getElementById('status').value = bookDetails.status;
+          document.getElementById('total_chapters').value = bookDetails.total_chapters;
+          document.getElementById('last_chapter').value = bookDetails.last_chapter;
+          document.getElementById('grade').value = bookDetails.grade ? bookDetails.grade : 0;
+          document.getElementById('priority').value = bookDetails.priority ? bookDetails.priority : 0;
+          document.getElementById('link').value = bookDetails.link;
+          document.getElementById('notes').value = bookDetails.notes;
+      });
+  });
+</script>
   {% block tabela%}
   {% endblock %}
 
